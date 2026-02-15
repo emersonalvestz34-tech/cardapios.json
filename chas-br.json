@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "versao": "3.0",
+    "pais_foco": "Brasil",
+    "disclaimer": "Ferramenta educativa. Plantas podem causar alergias e interações. Se estiver grávida/amamentando, tiver pressão alta/diabetes ou usar remédios contínuos (anti-hipertensivos, antidiabéticos, antidepressivos, anticoagulantes), procure orientação profissional."
+  },
+  "objetivos": {
+    "sono": { "nome": "Sono (leve)", "descricao": "Sugestões suaves para relaxar à noite." },
+    "estresse": { "nome": "Estresse (leve)", "descricao": "Opções suaves para acalmar durante o dia." },
+    "digestao": { "nome": "Digestão / gases", "descricao": "Opções tradicionais para desconforto leve após refeições." },
+    "resfriado": { "nome": "Resfriado leve / garganta", "descricao": "Apoio para sintomas leves (não substitui avaliação)." },
+    "nausea": { "nome": "Náusea (leve)", "descricao": "Sugestões tradicionais para enjoo leve." },
+    "colica": { "nome": "Cólica (leve)", "descricao": "Sugestões tradicionais (uso curto e cauteloso)." },
+    "pressao": { "nome": "Pressão alta (apoio)", "descricao": "Apoio educativo (não substitui tratamento). Use com cautela." },
+    "diabetes": { "nome": "Diabetes (apoio)", "descricao": "Apoio educativo (não substitui tratamento). Atenção a hipoglicemia e interações." }
+  },
+  "chas": [
+    {
+      "id": "camomila",
+      "nome": "Camomila",
+      "nome_cientifico": "Matricaria chamomilla",
+      "objetivos": ["sono", "estresse"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de chá (ou 1 sachê)", "agua_ml": 200, "tempo_min": 5, "como": "Abafe e coe." },
+      "dose": "1 xícara à noite (ou 1–2/dia).",
+      "alertas": ["Evite se alergia a Asteraceae (margarida/crisântemo).", "Pode dar sonolência."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "cautela", "anticoagulante": "cautela", "anti_hipertensivo": "ok", "antidiabetico": "ok" }
+    },
+    {
+      "id": "capim_cidreira",
+      "nome": "Capim-cidreira (capim-santo)",
+      "nome_cientifico": "Cymbopogon citratus",
+      "objetivos": ["sono", "estresse", "digestao"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de sopa (folhas)", "agua_ml": 200, "tempo_min": 8, "como": "Abafe bem e coe." },
+      "dose": "1–2 xícaras/dia.",
+      "alertas": ["Se der tontura/queda de pressão, reduza ou suspenda."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "ok", "anticoagulante": "ok", "anti_hipertensivo": "cautela", "antidiabetico": "ok" }
+    },
+    {
+      "id": "erva_doce",
+      "nome": "Erva-doce",
+      "nome_cientifico": "Foeniculum vulgare",
+      "objetivos": ["digestao", "colica"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de chá (sementes)", "agua_ml": 200, "tempo_min": 10, "como": "Amasse levemente as sementes, abafe e coe." },
+      "dose": "1 xícara após refeições (até 2/dia).",
+      "alertas": ["Evite uso contínuo prolongado sem orientação."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "ok", "anticoagulante": "ok", "anti_hipertensivo": "ok", "antidiabetico": "ok" }
+    },
+    {
+      "id": "hortela",
+      "nome": "Hortelã",
+      "nome_cientifico": "Mentha sp.",
+      "objetivos": ["digestao", "resfriado", "nausea"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de sopa (folhas)", "agua_ml": 200, "tempo_min": 6, "como": "Abafe e coe." },
+      "dose": "1 xícara após refeições (até 2/dia).",
+      "alertas": ["Pode piorar refluxo em algumas pessoas."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "ok", "anticoagulante": "ok", "anti_hipertensivo": "ok", "antidiabetico": "ok" }
+    },
+    {
+      "id": "gengibre",
+      "nome": "Gengibre",
+      "nome_cientifico": "Zingiber officinale",
+      "objetivos": ["resfriado", "digestao", "nausea"],
+      "preparo": { "tipo": "decoccao", "quantidade": "2–3 fatias finas", "agua_ml": 250, "tempo_min": 8, "como": "Ferva, desligue, descanse e coe." },
+      "dose": "1 xícara/dia por 2–3 dias (uso curto).",
+      "alertas": ["Pode irritar estômago.", "Cautela com risco de sangramento."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "cautela", "antidepressivo": "ok", "anticoagulante": "evitar", "anti_hipertensivo": "ok", "antidiabetico": "cautela" }
+    },
+
+    {
+      "id": "boldo",
+      "nome": "Boldo (uso popular)",
+      "nome_cientifico": "Peumus boldus / Plectranthus sp.",
+      "objetivos": ["digestao"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 folha pequena (infusão leve)", "agua_ml": 200, "tempo_min": 5, "como": "Infusão leve. Evite forte." },
+      "dose": "Ocasional e por pouco tempo.",
+      "alertas": ["Evite na gravidez/amamentação.", "Evite uso prolongado."],
+      "restricoes": { "gravidez_amamentacao": "evitar", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "ok", "anticoagulante": "cautela", "anti_hipertensivo": "ok", "antidiabetico": "ok" }
+    },
+    {
+      "id": "carqueja",
+      "nome": "Carqueja",
+      "nome_cientifico": "Baccharis trimera",
+      "objetivos": ["digestao", "pressao", "diabetes"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de chá", "agua_ml": 200, "tempo_min": 8, "como": "Abafe e coe." },
+      "dose": "1 xícara/dia (uso curto).",
+      "alertas": ["Pode baixar pressão/glicose em algumas pessoas."],
+      "restricoes": { "gravidez_amamentacao": "evitar", "pressao_alta": "cautela", "diabetes": "cautela", "antidepressivo": "ok", "anticoagulante": "cautela", "anti_hipertensivo": "cautela", "antidiabetico": "cautela" }
+    },
+    {
+      "id": "hibisco",
+      "nome": "Hibisco",
+      "nome_cientifico": "Hibiscus sabdariffa",
+      "objetivos": ["pressao", "estresse"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de chá", "agua_ml": 200, "tempo_min": 7, "como": "Abafe e coe." },
+      "dose": "1 xícara/dia (uso curto).",
+      "alertas": ["Pode baixar pressão.", "Se der tontura, suspenda."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "cautela", "diabetes": "ok", "antidepressivo": "ok", "anticoagulante": "cautela", "anti_hipertensivo": "cautela", "antidiabetico": "ok" }
+    },
+    {
+      "id": "maracuja_folha",
+      "nome": "Maracujá (folhas)",
+      "nome_cientifico": "Passiflora sp.",
+      "objetivos": ["sono", "estresse"],
+      "preparo": { "tipo": "infusao", "quantidade": "1 colher de sopa", "agua_ml": 200, "tempo_min": 10, "como": "Abafe e coe." },
+      "dose": "1 xícara à noite.",
+      "alertas": ["Pode dar sonolência.", "Evite misturar com sedativos."],
+      "restricoes": { "gravidez_amamentacao": "cautela", "pressao_alta": "ok", "diabetes": "ok", "antidepressivo": "cautela", "anticoagulante": "ok", "anti_hipertensivo": "ok", "antidiabetico": "ok" }
+    },
+
+    { "id":"malva", "nome":"Malva", "nome_cientifico":"Malva sylvestris", "objetivos":["resfriado"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa","agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"1 xícara 1–2x/dia (uso curto).", "alertas":["Se persistir, procure avaliação."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+    { "id":"gua_co", "nome":"Guaco", "nome_cientifico":"Mikania glomerata", "objetivos":["resfriado"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá","agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"1 xícara 1–2x/dia (uso curto).", "alertas":["Cautela com anticoagulantes."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+    { "id":"romã_gargarejo", "nome":"Romã (casca, gargarejo)", "nome_cientifico":"Punica granatum", "objetivos":["resfriado"], "preparo":{"tipo":"decoccao","quantidade":"1 colher de sopa (casca)","agua_ml":250,"tempo_min":10,"como":"Ferva, esfrie e use para gargarejo."}, "dose":"Gargarejo 1–2x/dia (uso curto).", "alertas":["Evite uso interno contínuo sem orientação."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+    { "id":"mel_limao", "nome":"Mel com limão (apoio)", "nome_cientifico":"", "objetivos":["resfriado"], "preparo":{"tipo":"mistura","quantidade":"1 colher de chá de mel + gotas de limão","agua_ml":200,"tempo_min":0,"como":"Misture em água morna (não fervendo)."}, "dose":"1–2x/dia (NÃO para <1 ano).", "alertas":["Mel contraindicado < 1 ano.","Limão pode irritar gastrite/refluxo."], "restricoes":{"gravidez_amamentacao":"ok","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"cautela"} },
+
+    { "id":"anis", "nome":"Anis-estrelado (cautela)", "nome_cientifico":"Illicium verum", "objetivos":["digestao","colica"], "preparo":{"tipo":"infusao","quantidade":"1 estrela","agua_ml":200,"tempo_min":8,"como":"Abafe e coe."}, "dose":"Uso ocasional.", "alertas":["Não confundir com espécies tóxicas.","Evite em criança pequena sem orientação."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+    { "id":"alecrim", "nome":"Alecrim", "nome_cientifico":"Salvia rosmarinus", "objetivos":["digestao","estresse"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá","agua_ml":200,"tempo_min":7,"como":"Abafe e coe."}, "dose":"1 xícara/dia (uso curto).", "alertas":["Evite na gravidez.","Cautela em hipertensão."], "restricoes":{"gravidez_amamentacao":"evitar","pressao_alta":"cautela","diabetes":"ok","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"cautela","antidiabetico":"ok"} },
+    { "id":"cravo", "nome":"Cravo-da-índia", "nome_cientifico":"Syzygium aromaticum", "objetivos":["digestao"], "preparo":{"tipo":"infusao","quantidade":"2–3 cravos","agua_ml":200,"tempo_min":8,"como":"Abafe e coe."}, "dose":"Uso ocasional.", "alertas":["Evite exagero.","Cautela com anticoagulantes."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+
+    { "id":"casca_laranja", "nome":"Casca de laranja", "nome_cientifico":"Citrus sinensis", "objetivos":["digestao","estresse"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa (casca seca)", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"1 xícara/dia.", "alertas":["Se refluxo piorar, evite."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+    { "id":"casca_abacaxi", "nome":"Casca de abacaxi (chá leve)", "nome_cientifico":"Ananas comosus", "objetivos":["digestao"], "preparo":{"tipo":"decoccao","quantidade":"casca bem lavada (porção)", "agua_ml":600,"tempo_min":10,"como":"Ferva, desligue e coe."}, "dose":"1–2 copos/dia (uso curto).", "alertas":["Evite se alergia."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"ok","antidiabetico":"cautela"} },
+
+    { "id":"alfavaca", "nome":"Alfavaca (manjericão)", "nome_cientifico":"Ocimum basilicum", "objetivos":["digestao","estresse"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa (folhas)", "agua_ml":200,"tempo_min":8,"como":"Abafe e coe."}, "dose":"1 xícara/dia.", "alertas":["Evite excesso contínuo."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+
+    { "id":"erva_mate", "nome":"Erva-mate (cafeína)", "nome_cientifico":"Ilex paraguariensis", "objetivos":["estresse"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá", "agua_ml":200,"tempo_min":5,"como":"Infusão leve."}, "dose":"Evite à noite.", "alertas":["Pode aumentar ansiedade/insônia em alguns."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"cautela","diabetes":"ok","antidepressivo":"cautela","anticoagulante":"ok","anti_hipertensivo":"cautela","antidiabetico":"ok"} },
+
+    { "id":"cafezinho_sem", "nome":"Café descafeinado (opcional)", "nome_cientifico":"Coffea sp.", "objetivos":["digestao"], "preparo":{"tipo":"mistura","quantidade":"1 dose", "agua_ml":0,"tempo_min":0,"como":"Sem açúcar, se possível."}, "dose":"Ocasional.", "alertas":["Café pode piorar gastrite/refluxo."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"cautela","diabetes":"ok","antidepressivo":"cautela","anticoagulante":"ok","anti_hipertensivo":"cautela","antidiabetico":"ok"} },
+
+    { "id":"agua_morna", "nome":"Água morna (apoio)", "nome_cientifico":"", "objetivos":["digestao","nausea"], "preparo":{"tipo":"mistura","quantidade":"1 copo", "agua_ml":200,"tempo_min":0,"como":"Água morna simples."}, "dose":"1 copo quando necessário.", "alertas":["—"], "restricoes":{"gravidez_amamentacao":"ok","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+
+    { "id":"limonada_leve", "nome":"Água com limão (cautela)", "nome_cientifico":"Citrus limon", "objetivos":["digestao"], "preparo":{"tipo":"mistura","quantidade":"algumas gotas", "agua_ml":200,"tempo_min":0,"como":"Misture em água."}, "dose":"Ocasional.", "alertas":["Pode irritar gastrite/refluxo."], "restricoes":{"gravidez_amamentacao":"ok","pressao_alta":"ok","diabetes":"ok","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"ok"} },
+
+    { "id":"cipo_mil_homens", "nome":"Cipó-mil-homens (cautela)", "nome_cientifico":"Aristolochia sp. (atenção)", "objetivos":["digestao"], "preparo":{"tipo":"infusao","quantidade":"—", "agua_ml":0,"tempo_min":0,"como":"Não recomendado sem orientação."}, "dose":"Evitar uso caseiro.", "alertas":["Evite por segurança (risco de toxicidade/espécies)."], "restricoes":{"gravidez_amamentacao":"evitar","pressao_alta":"evitar","diabetes":"evitar","antidepressivo":"evitar","anticoagulante":"evitar","anti_hipertensivo":"evitar","antidiabetico":"evitar"} },
+
+    { "id":"cha_verde", "nome":"Chá verde (cafeína)", "nome_cientifico":"Camellia sinensis", "objetivos":["diabetes","pressao"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá", "agua_ml":200,"tempo_min":3,"como":"Infusão curta (menos amargo)."}, "dose":"Até 1 xícara/dia (se tolerar).", "alertas":["Pode piorar ansiedade/insônia.","Cautela com pressão."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"cautela","diabetes":"cautela","antidepressivo":"cautela","anticoagulante":"cautela","anti_hipertensivo":"cautela","antidiabetico":"cautela"} },
+
+    { "id":"cavalinha", "nome":"Cavalinha (cautela)", "nome_cientifico":"Equisetum arvense", "objetivos":["pressao"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"Uso curto (poucos dias).", "alertas":["Evite uso prolongado.","Cautela com diuréticos/pressão."], "restricoes":{"gravidez_amamentacao":"evitar","pressao_alta":"cautela","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"cautela","antidiabetico":"cautela"} },
+
+    { "id":"salsa", "nome":"Salsa (cautela)", "nome_cientifico":"Petroselinum crispum", "objetivos":["pressao"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa (folhas)", "agua_ml":200,"tempo_min":8,"como":"Abafe e coe."}, "dose":"Uso ocasional e curto.", "alertas":["Evite na gravidez.","Pode agir como diurético."], "restricoes":{"gravidez_amamentacao":"evitar","pressao_alta":"cautela","diabetes":"ok","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"cautela","antidiabetico":"ok"} },
+
+    { "id":"insulina_vegetal", "nome":"Insulina vegetal (cautela)", "nome_cientifico":"Costus sp.", "objetivos":["diabetes"], "preparo":{"tipo":"infusao","quantidade":"1 colher de chá", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"Uso curto e cauteloso.", "alertas":["Risco de hipoglicemia se usar remédio de diabetes."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"evitar"} },
+
+    { "id":"pata_de_vaca", "nome":"Pata-de-vaca (cautela)", "nome_cientifico":"Bauhinia forficata",
+      "objetivos":["diabetes"],
+      "preparo":{"tipo":"infusao","quantidade":"1 colher de chá (folhas)", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."},
+      "dose":"Uso curto e cauteloso.",
+      "alertas":["Risco de hipoglicemia, principalmente com antidiabéticos."],
+      "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"evitar"}
+    },
+
+    { "id":"cinnamon", "nome":"Canela (evite em diabetes com remédio)", "nome_cientifico":"Cinnamomum sp.", "objetivos":["diabetes","digestao"], "preparo":{"tipo":"infusao","quantidade":"1 pau pequeno", "agua_ml":200,"tempo_min":10,"como":"Abafe. Não exagere."}, "dose":"Uso ocasional.", "alertas":["Evite na gravidez.","Pode interferir com glicose/remédios."], "restricoes":{"gravidez_amamentacao":"evitar","pressao_alta":"cautela","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"cautela","anti_hipertensivo":"ok","antidiabetico":"evitar"} },
+
+    { "id":"folha_goiabeira", "nome":"Folha de goiabeira (cautela)", "nome_cientifico":"Psidium guajava", "objetivos":["digestao","diabetes"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"Uso curto.", "alertas":["Pode afetar glicose em alguns."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"cautela"} },
+
+    { "id":"folha_amora", "nome":"Folha de amora (cautela)", "nome_cientifico":"Morus sp.", "objetivos":["diabetes"], "preparo":{"tipo":"infusao","quantidade":"1 colher de sopa", "agua_ml":200,"tempo_min":10,"como":"Abafe e coe."}, "dose":"Uso curto e cauteloso.", "alertas":["Pode reduzir glicose; cautela com antidiabéticos."], "restricoes":{"gravidez_amamentacao":"cautela","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"cautela"} },
+
+    { "id":"copo_leite_morno", "nome":"Leite morno (opcional)", "nome_cientifico":"", "objetivos":["sono"], "preparo":{"tipo":"mistura","quantidade":"1 copo", "agua_ml":0,"tempo_min":0,"como":"Aqueça sem ferver."}, "dose":"1 copo à noite (se tolerar).", "alertas":["Evite se intolerância à lactose."], "restricoes":{"gravidez_amamentacao":"ok","pressao_alta":"ok","diabetes":"cautela","antidepressivo":"ok","anticoagulante":"ok","anti_hipertensivo":"ok","antidiabetico":"cautela"} },
+
+    { "id":"cacau_100", "nome":"Cacau 100% (opcional)", "nome_cientifico":"Theobroma cacao", "objetivos":["estresse"], "preparo":{"tipo":"mistura","quantidade":"1 colher de chá", "agua_ml":200,"tempo_min":0,"como":"Misture em água/leite morno."}, "dose":"Evite perto do sono se te acelera.", "alertas":["Pode estimular algumas pessoas."], "restricoes":{"gravidez_amamentacao":"ok","pressao_alta":"cautela","diabetes":"cautela","antidepressivo":"cautela","anticoagulante":"ok","anti_hipertensivo":"cautela","antidiabetico":"cautela"} }
+
+    /* ✅ Você pode continuar adicionando mais seguindo o mesmo padrão.
+       Se quiser eu te mando uma versão 4 com ~100 entradas (Brasil) no mesmo formato. */
+  ]
+}
