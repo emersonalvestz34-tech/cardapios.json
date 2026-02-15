@@ -1,5 +1,5 @@
 (function () {
-  const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/chas-br.json?v=3";
+  const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/chas-br.json?v=4";
 
   const el = (id) => document.getElementById(id);
   const uniq = (arr) => Array.from(new Set(arr));
