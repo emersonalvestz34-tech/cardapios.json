@@ -1,9 +1,7 @@
 (function () {
-  // ======= CONFIG =======
-  const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/cardapios.json?v=1";
-  const STORAGE_KEY = "psbCardapioPremium_v1";
+  const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/cardapios.json?v=2";
+  const STORAGE_KEY = "psbCardapioPremium_v2";
 
-  // ======= HELPERS =======
   const el = (id) => document.getElementById(id);
   const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
 
@@ -38,8 +36,7 @@
     return Promise.resolve();
   }
 
-  // ======= CALORIE ESTIMATOR (fallback) =======
-  // Estimativa simples via palavras-chave (não é médico/nutricional).
+  // ===== fallback estimator (caso você deixe alguma refeição sem kcal_total) =====
   const KCAL_MAP = [
     { re: /\barroz\b/i, kcal: 200 },
     { re: /\bfeij[aã]o\b/i, kcal: 180 },
@@ -65,14 +62,22 @@
     { re: /\bvitamina\b/i, kcal: 240 }
   ];
 
-  function estimateKcalFromItems(items) {
-    // Se no futuro você colocar calorias no JSON:
-    // - mealObj.kcal_total ou
-    // - itens como objetos { nome, kcal }
-    // este código já suporta.
+  function estimateKcalFromText(text) {
+    let found = 0;
+    for (const rule of KCAL_MAP) if (rule.re.test(text)) found += rule.kcal;
+    if (found > 650) found = 650;
+    if (found === 0) found = 120;
+    return found;
+  }
+
+  // ✅ usa kcal_total se existir, senão estima por itens
+  function kcalMeal(mealObj) {
+    if (mealObj && typeof mealObj.kcal_total === "number") return Math.round(mealObj.kcal_total);
+
+    const items = (mealObj && mealObj.itens) ? mealObj.itens : [];
     let total = 0;
 
-    for (const it of items || []) {
+    for (const it of items) {
       if (typeof it === "object" && it) {
         if (typeof it.kcal === "number") total += it.kcal;
         else if (typeof it.nome === "string") total += estimateKcalFromText(it.nome);
@@ -81,51 +86,42 @@
       }
     }
 
-    // Ajuste mínimo se ficou 0 por falta de match
-    if (total <= 0 && (items || []).length) total = 250;
-
+    if (total <= 0 && items.length) total = 250;
     return Math.round(total);
   }
 
-  function estimateKcalFromText(text) {
-    let found = 0;
-    for (const rule of KCAL_MAP) {
-      if (rule.re.test(text)) found += rule.kcal;
-    }
-    // se encontrou muita coisa no mesmo item, limita um pouco
-    if (found > 650) found = 650;
-    // se nada bateu, assume “leve”
-    if (found === 0) found = 80;
-    return found;
-  }
-
-  // ======= OBJECTIVE MULTIPLIER =======
-  // "Emagrecer": reduz um pouco a estimativa exibida (e sugere porção menor)
-  // "Manter": base
-  // "Ganhar": aumenta um pouco (e sugere complemento)
   const OBJ = {
     emagrecer: { label: "Emagrecer", mult: 0.92, tip: "Dica: priorize salada/legumes e porção menor de carbo." },
     manter: { label: "Manter", mult: 1.0, tip: "Dica: equilíbrio — prato simples e sem exageros." },
     ganhar: { label: "Ganhar", mult: 1.12, tip: "Dica: inclua mais proteína e um carbo extra (ex.: banana/aveia)." }
   };
 
-  // ======= STATE =======
   let dataCache = null;
   let lastGenerated = null;
 
-  // ======= RENDER =======
+  function getFormato() {
+    const key = el("psbFormato").value;
+    const f = dataCache.formatos[key];
+    return { key, f };
+  }
+
+  function getObjective() {
+    const key = el("psbObjetivo").value;
+    return OBJ[key] || OBJ.manter;
+  }
+
   function renderMealCard(title, mealObj) {
     const itens = (mealObj.itens || []);
     const subs = (mealObj.substituicoes || []);
     const itemsHtml = itens.map(i => `<li>${escapeHtml(typeof i === "object" ? (i.nome || "") : i)}</li>`).join("");
     const subsHtml = subs.map(s => `<li>${escapeHtml(s)}</li>`).join("");
+    const kcal = kcalMeal(mealObj);
 
-    const kcal = estimateKcalFromItems(itens);
     return `
       <div class="psb-meal">
         <div class="psb-meal-head">
           <h4>${escapeHtml(title)} <span class="psb-meal-title">${escapeHtml(mealObj.titulo || "")}</span></h4>
-          <div class="psb-chip">${kcal} kcal (estim.)</div>
+          <div class="psb-chip">${kcal} kcal</div>
         </div>
 
         <div class="psb-cols">
@@ -142,26 +138,14 @@
     `;
   }
 
-  function getFormato() {
-    const key = el("psbFormato").value;
-    const f = dataCache.formatos[key];
-    return { key, f };
-  }
-
-  function getObjective() {
-    const key = el("psbObjetivo").value;
-    return OBJ[key] || OBJ.manter;
-  }
-
-  function calcDayTotalKcal(day) {
+  function dayTotal(day) {
     const obj = getObjective();
-    const base =
-      estimateKcalFromItems(day.cafe.itens) +
-      estimateKcalFromItems(day.almoco.itens) +
-      estimateKcalFromItems(day.lanche.itens) +
-      estimateKcalFromItems(day.jantar.itens);
-
+    const base = kcalMeal(day.cafe) + kcalMeal(day.almoco) + kcalMeal(day.lanche) + kcalMeal(day.jantar);
     return Math.round(base * obj.mult);
+  }
+
+  function setCopy(text) {
+    el("psbCopy").dataset.copy = text || "";
   }
 
   function buildCopyDay(f, day, totalKcal) {
@@ -170,18 +154,18 @@
 
     return `🍽️ Cardápio do Dia — ${f.nome}
 🎯 Objetivo: ${obj.label}
-🔥 Total estimado: ${totalKcal} kcal
+🔥 Total: ${totalKcal} kcal
 
-☕ Café: ${day.cafe.titulo}
+☕ Café: ${day.cafe.titulo} (${kcalMeal(day.cafe)} kcal)
 - ${day.cafe.itens.join(", ")}
 
-🍛 Almoço: ${day.almoco.titulo}
+🍛 Almoço: ${day.almoco.titulo} (${kcalMeal(day.almoco)} kcal)
 - ${day.almoco.itens.join(", ")}
 
-🍌 Lanche: ${day.lanche.titulo}
+🍌 Lanche: ${day.lanche.titulo} (${kcalMeal(day.lanche)} kcal)
 - ${day.lanche.itens.join(", ")}
 
-🌙 Jantar: ${day.jantar.titulo}
+🌙 Jantar: ${day.jantar.titulo} (${kcalMeal(day.jantar)} kcal)
 - ${day.jantar.itens.join(", ")}
 
 ${obj.tip}
@@ -200,11 +184,11 @@ Obs.: ${aviso}`.trim();
     ];
 
     week.forEach((d, i) => {
-      lines.push(`${days[i]} — Total estimado: ${totals[i]} kcal`);
-      lines.push(`☕ Café: ${d.cafe.titulo} — ${d.cafe.itens.join(", ")}`);
-      lines.push(`🍛 Almoço: ${d.almoco.titulo} — ${d.almoco.itens.join(", ")}`);
-      lines.push(`🍌 Lanche: ${d.lanche.titulo} — ${d.lanche.itens.join(", ")}`);
-      lines.push(`🌙 Jantar: ${d.jantar.titulo} — ${d.jantar.itens.join(", ")}`);
+      lines.push(`${days[i]} — Total: ${totals[i]} kcal`);
+      lines.push(`☕ Café: ${d.cafe.titulo} (${kcalMeal(d.cafe)} kcal)`);
+      lines.push(`🍛 Almoço: ${d.almoco.titulo} (${kcalMeal(d.almoco)} kcal)`);
+      lines.push(`🍌 Lanche: ${d.lanche.titulo} (${kcalMeal(d.lanche)} kcal)`);
+      lines.push(`🌙 Jantar: ${d.jantar.titulo} (${kcalMeal(d.jantar)} kcal)`);
       lines.push("");
     });
 
@@ -225,17 +209,16 @@ Obs.: ${aviso}`.trim();
       jantar: pick(r.jantar)
     };
 
-    const totalKcal = calcDayTotalKcal(day);
+    const totalKcal = dayTotal(day);
 
-    lastGenerated = { tipo: "dia", key, conteudo: day, totalKcal };
+    lastGenerated = { tipo: "dia", key, objetivo: el("psbObjetivo").value, conteudo: day, totalKcal };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(lastGenerated));
 
     el("psbDesc").textContent = f.descricao || "";
-
     el("psbResumo").innerHTML = `
       <div class="psb-summary">
         <div><b>🎯 Objetivo:</b> ${escapeHtml(getObjective().label)}</div>
-        <div><b>🔥 Total estimado:</b> ${totalKcal} kcal</div>
+        <div><b>🔥 Total:</b> ${totalKcal} kcal</div>
         <div class="psb-tip">${escapeHtml(getObjective().tip)}</div>
       </div>
     `;
@@ -264,18 +247,17 @@ Obs.: ${aviso}`.trim();
       jantar: pick(r.jantar)
     }));
 
-    const totals = week.map(d => calcDayTotalKcal(d));
+    const totals = week.map(d => dayTotal(d));
     const avg = Math.round(totals.reduce((a, b) => a + b, 0) / totals.length);
 
-    lastGenerated = { tipo: "semana", key, conteudo: week, totals, avg };
+    lastGenerated = { tipo: "semana", key, objetivo: el("psbObjetivo").value, conteudo: week, totals, avg };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(lastGenerated));
 
     el("psbDesc").textContent = f.descricao || "";
-
     el("psbResumo").innerHTML = `
       <div class="psb-summary">
         <div><b>🎯 Objetivo:</b> ${escapeHtml(getObjective().label)}</div>
-        <div><b>🔥 Média diária:</b> ${avg} kcal (estim.)</div>
+        <div><b>🔥 Média diária:</b> ${avg} kcal</div>
         <div class="psb-tip">${escapeHtml(getObjective().tip)}</div>
       </div>
     `;
@@ -285,7 +267,7 @@ Obs.: ${aviso}`.trim();
         <div class="psb-weekday">
           <div class="psb-weekday-head">
             <h4>📅 ${escapeHtml(days[i])}</h4>
-            <div class="psb-chip">${totals[i]} kcal (estim.)</div>
+            <div class="psb-chip">${totals[i]} kcal</div>
           </div>
           <div class="psb-weekday-grid">
             ${renderMealCard("Café", d.cafe)}
@@ -309,7 +291,6 @@ Obs.: ${aviso}`.trim();
     }
 
     let items = [];
-
     if (lastGenerated.tipo === "dia") {
       const d = lastGenerated.conteudo;
       items = [...d.cafe.itens, ...d.almoco.itens, ...d.lanche.itens, ...d.jantar.itens];
@@ -319,11 +300,7 @@ Obs.: ${aviso}`.trim();
       });
     }
 
-    const normalized = items.map(x => {
-      if (typeof x === "object" && x) return String(x.nome || "").trim();
-      return String(x).trim();
-    }).filter(Boolean);
-
+    const normalized = items.map(x => (typeof x === "object" && x) ? String(x.nome || "").trim() : String(x).trim()).filter(Boolean);
     const unique = Array.from(new Set(normalized)).sort((a, b) => a.localeCompare(b, "pt-BR"));
 
     el("psbResumo").innerHTML = `
@@ -351,7 +328,6 @@ Obs.: ${aviso}`.trim();
   }
 
   function printPDF() {
-    // Abre a impressão (salvar como PDF)
     window.print();
   }
 
@@ -361,28 +337,20 @@ Obs.: ${aviso}`.trim();
       if (!saved) return;
       const s = JSON.parse(saved);
       if (!s || !s.tipo || !s.key) return;
-      lastGenerated = s;
 
-      // aplica objetivo salvo se existir
       if (s.objetivo && el("psbObjetivo")) el("psbObjetivo").value = s.objetivo;
 
-      // re-render
+      lastGenerated = s;
       if (s.tipo === "dia") generateDay();
       else if (s.tipo === "semana") generateWeek();
       else if (s.tipo === "lista") shoppingList();
     } catch (_) {}
   }
 
-  function saveObjective() {
-    if (!lastGenerated) return;
-    lastGenerated.objetivo = el("psbObjetivo").value;
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(lastGenerated));
-  }
-
   function bind() {
-    el("psbGerar").addEventListener("click", () => { generateDay(); saveObjective(); });
-    el("psbSemana").addEventListener("click", () => { generateWeek(); saveObjective(); });
-    el("psbLista").addEventListener("click", () => { shoppingList(); saveObjective(); });
+    el("psbGerar").addEventListener("click", generateDay);
+    el("psbSemana").addEventListener("click", generateWeek);
+    el("psbLista").addEventListener("click", shoppingList);
 
     el("psbCopiar").addEventListener("click", async () => {
       const text = el("psbCopy").dataset.copy || "";
@@ -391,16 +359,14 @@ Obs.: ${aviso}`.trim();
       setTimeout(() => setStatus(""), 1400);
     });
 
-    el("psbPDF").addEventListener("click", () => { printPDF(); });
+    el("psbPDF").addEventListener("click", printPDF);
 
-    el("psbFormato").addEventListener("change", () => { generateDay(); saveObjective(); });
-    el("psbObjetivo").addEventListener("change", () => { 
-      // re-render no modo atual
-      if (!lastGenerated) { generateDay(); return; }
-      saveObjective();
+    el("psbFormato").addEventListener("change", generateDay);
+    el("psbObjetivo").addEventListener("change", () => {
+      if (!lastGenerated) return generateDay();
       if (lastGenerated.tipo === "dia") generateDay();
       else if (lastGenerated.tipo === "semana") generateWeek();
-      else if (lastGenerated.tipo === "lista") shoppingList();
+      else shoppingList();
     });
   }
 
@@ -412,7 +378,6 @@ Obs.: ${aviso}`.trim();
       if (!res.ok) throw new Error("Falha ao carregar JSON.");
       dataCache = await res.json();
 
-      // select formatos
       const select = el("psbFormato");
       select.innerHTML = "";
       Object.keys(dataCache.formatos).forEach((k) => {
@@ -422,7 +387,6 @@ Obs.: ${aviso}`.trim();
         select.appendChild(opt);
       });
 
-      // select objetivos
       const objSel = el("psbObjetivo");
       objSel.innerHTML = "";
       Object.keys(OBJ).forEach((k) => {
@@ -436,7 +400,6 @@ Obs.: ${aviso}`.trim();
       loadSaved();
 
       if (!lastGenerated) generateDay();
-
       setStatus("");
     } catch (e) {
       setStatus("Erro: " + (e.message || e));
