@@ -1,3 +1,4 @@
+console.log("CARDAPIO TURBINADO v7 carregou ✅");
 (function () {
 
   const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/cardapios.json";
@@ -140,3 +141,4 @@
   document.addEventListener("DOMContentLoaded", init);
 
 })();
+
