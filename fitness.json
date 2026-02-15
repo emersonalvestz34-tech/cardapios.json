@@ -3,7 +3,7 @@
     "meta": {
       "app_id": "para-seu-bem-fitness",
       "titulo": "Calculadora Fitness - Para Seu Bem",
-      "descricao": "Calcule IMC, peso ideal, agua diaria, TMB, deficit estimado e receba plano de treino em casa + desafio 7 dias.",
+      "descricao": "Calcule IMC, peso ideal, agua diaria, TMB, gasto diario, meta e calorias por atividade (MET).",
       "versao": "1.0.0"
     },
 
@@ -13,7 +13,7 @@
       "idade": { "label": "Idade", "min": 10, "max": 90, "step": 1 },
       "sexo": { "label": "Sexo", "options": ["masculino", "feminino"] },
       "nivel": { "label": "Nivel", "options": ["iniciante", "intermediario"] },
-      "dias_semana": { "label": "Dias/semana", "min": 2, "max": 7, "step": 1 },
+      "dias_semana": { "label": "Dias/semana", "min": 1, "max": 7, "step": 1 },
       "tempo_min": { "label": "Tempo por treino (min)", "min": 10, "max": 60, "step": 1 },
       "objetivo": { "label": "Objetivo", "options": ["perder_peso", "manter", "ganhar_massa"] }
     },
@@ -24,25 +24,25 @@
           "min": 0,
           "max": 18.49,
           "titulo": "Abaixo do peso",
-          "recomendacao": "Aumente calorias com comida de verdade e fortaleça o corpo com treino leve + proteina."
+          "recomendacao": "Foque em alimentacao equilibrada e treino de forca leve para ganhar massa com saude."
         },
         {
           "min": 18.5,
           "max": 24.99,
           "titulo": "Peso normal",
-          "recomendacao": "Mantenha habitos saudaveis, treino consistente e sono em dia."
+          "recomendacao": "Mantenha habitos saudaveis e consistencia no treino. Foque em rotina."
         },
         {
           "min": 25,
           "max": 29.99,
           "titulo": "Sobrepeso",
-          "recomendacao": "Corte ultraprocessados e acrescente caminhada/treino em casa 3-5x semana."
+          "recomendacao": "Comece com deficit moderado, treino em casa e caminhada diaria. Progresso constante."
         },
         {
           "min": 30,
           "max": 1000,
           "titulo": "Obesidade",
-          "recomendacao": "Comece leve e progressivo: rotina simples, caminhada + treino curto. Se puder, acompanhamento profissional ajuda muito."
+          "recomendacao": "Comece leve e progressivo. Caminhada + treino curto. Se puder, acompanhamento profissional ajuda."
         }
       ]
     },
@@ -50,106 +50,106 @@
     "peso_ideal": {
       "imc_min": 18.5,
       "imc_max": 24.9,
-      "texto": "Peso ideal aqui e uma faixa calculada pelo IMC saudavel (18.5 a 24.9)."
+      "texto": "Faixa calculada usando IMC saudavel (18.5 a 24.9)."
     },
 
     "agua": {
       "ml_por_kg": 35,
-      "texto": "Regra simples: 35ml por kg. Ex: 70kg = 2.45L/dia."
+      "texto": "Regra simples: 35ml por kg de peso."
     },
 
     "tmb": {
       "metodo": "mifflin_st_jeor",
-      "texto": "TMB estimada pelo metodo Mifflin-St Jeor. E uma estimativa."
+      "texto": "TMB (BMR) estimada pelo metodo Mifflin-St Jeor."
     },
 
-    "atividade": {
-      "fatores": [
-        { "id": "sedentario", "label": "Sedentario (quase nada)", "factor": 1.2 },
-        { "id": "leve", "label": "Leve (1-3 dias/semana)", "factor": 1.375 },
-        { "id": "moderado", "label": "Moderado (3-5 dias/semana)", "factor": 1.55 },
-        { "id": "alto", "label": "Alto (6-7 dias/semana)", "factor": 1.725 }
-      ]
+    "tdee": {
+      "mapa_por_dias_treino": [
+        { "min_dias": 0, "max_dias": 1, "factor": 1.2, "label": "Sedentario" },
+        { "min_dias": 2, "max_dias": 3, "factor": 1.375, "label": "Leve" },
+        { "min_dias": 4, "max_dias": 5, "factor": 1.55, "label": "Moderado" },
+        { "min_dias": 6, "max_dias": 6, "factor": 1.725, "label": "Alto" },
+        { "min_dias": 7, "max_dias": 7, "factor": 1.9, "label": "Muito alto" }
+      ],
+      "texto": "Gasto diario estimado = TMB x fator por dias de treino."
     },
 
-    "deficit": {
+    "objetivo_kcal": {
       "regras": {
-        "perder_peso": { "kcal_dia": -400, "texto": "Deficit moderado (-400 kcal/dia) costuma ser um bom inicio." },
-        "manter": { "kcal_dia": 0, "texto": "Manutencao: coma proximo do seu gasto diario." },
-        "ganhar_massa": { "kcal_dia": 250, "texto": "Superavit leve (+250 kcal/dia) com treino de forca." }
+        "perder_peso": { "ajuste_kcal_dia": -400, "texto": "Deficit moderado costuma ser um bom inicio." },
+        "manter": { "ajuste_kcal_dia": 0, "texto": "Manutencao: perto do gasto diario." },
+        "ganhar_massa": { "ajuste_kcal_dia": 250, "texto": "Superavit leve com treino de forca." }
       },
-      "estimativa_kg_mes": {
-        "kcal_por_kg": 7700,
-        "texto": "1kg de gordura e aproximadamente 7700 kcal (estimativa)."
-      }
+      "limites_deficit_dia": { "min": -900, "max": 900 },
+      "kcal_por_kg": 7700,
+      "texto": "Estimativa: 7700 kcal ~ 1kg (aprox)."
     },
 
     "meta_mensal": {
-      "texto": "Defina quantos kg quer perder e em quantos meses. A calculadora estima kcal/dia necessarias.",
-      "limites": { "kg_min": 1, "kg_max": 40, "meses_min": 1, "meses_max": 24 }
+      "limites": { "kg_min": 1, "kg_max": 40, "meses_min": 1, "meses_max": 24 },
+      "texto": "Calcula deficit diario aproximado para atingir a meta no tempo escolhido."
     },
 
     "calorias_atividades": {
-      "texto": "Valores aproximados (por minuto) para uma pessoa media. Ajuste conforme seu corpo.",
-      "kcal_por_min": {
-        "caminhada_leve": 4,
-        "caminhada_rapida": 6,
-        "polichinelo": 10,
-        "agachamento": 6,
-        "prancha": 3,
-        "subir_escada": 9,
-        "faxina_pesada": 5
-      }
+      "met_formula": "kcal = MET * 3.5 * peso_kg / 200 * minutos",
+      "atividades": [
+        { "id": "caminhada_leve", "label": "Caminhada leve", "met": 3.3 },
+        { "id": "caminhada_rapida", "label": "Caminhada rapida", "met": 5.0 },
+        { "id": "polichinelo", "label": "Polichinelo", "met": 8.0 },
+        { "id": "agachamento", "label": "Agachamento (moderado)", "met": 5.0 },
+        { "id": "prancha", "label": "Prancha (isometrico)", "met": 3.0 },
+        { "id": "subir_escada", "label": "Subir escada", "met": 8.8 },
+        { "id": "faxina_pesada", "label": "Faxina pesada", "met": 3.8 }
+      ]
     },
 
     "treinos_casa": {
       "iniciante": [
-        { "nome": "caminhada_no_lugar", "label": "Caminhada no lugar", "series": 1, "reps": "10 min" },
-        { "nome": "agachamento", "label": "Agachamentos", "series": 3, "reps": "10" },
-        { "nome": "flexao_parede", "label": "Flexao na parede", "series": 3, "reps": "8" },
-        { "nome": "abdominal_simples", "label": "Abdominal simples", "series": 3, "reps": "10" },
-        { "nome": "prancha", "label": "Prancha", "series": 3, "reps": "20s" }
+        { "label": "Caminhada no lugar", "series": 1, "reps": "10 min" },
+        { "label": "Agachamentos", "series": 3, "reps": "10" },
+        { "label": "Flexao na parede", "series": 3, "reps": "8" },
+        { "label": "Abdominal simples", "series": 3, "reps": "10" },
+        { "label": "Prancha", "series": 3, "reps": "20s" }
       ],
       "intermediario": [
-        { "nome": "polichinelo", "label": "Polichinelos", "series": 3, "reps": "20" },
-        { "nome": "agachamento_salto", "label": "Agachamento com salto", "series": 3, "reps": "12" },
-        { "nome": "flexao", "label": "Flexao tradicional", "series": 3, "reps": "10" },
-        { "nome": "prancha", "label": "Prancha", "series": 3, "reps": "30s" },
-        { "nome": "mountain_climbers", "label": "Mountain climbers", "series": 3, "reps": "20" }
+        { "label": "Polichinelos", "series": 3, "reps": "20" },
+        { "label": "Agachamento com salto", "series": 3, "reps": "12" },
+        { "label": "Flexao tradicional", "series": 3, "reps": "10" },
+        { "label": "Prancha", "series": 3, "reps": "30s" },
+        { "label": "Mountain climbers", "series": 3, "reps": "20" }
       ]
     },
 
     "habitos_diarios": [
-      "Beber agua ao longo do dia (nao tudo de uma vez)",
-      "Trocar refrigerante por agua com limao (se tolerar bem)",
+      "Beber agua ao longo do dia",
+      "Trocar refrigerante por agua (quando possivel)",
       "Evitar ultraprocessados na semana",
-      "Dormir 7-8 horas (sono ruim aumenta fome)",
-      "Fazer 10-20 min de caminhada ou movimento diario",
-      "Comer proteina em pelo menos 2 refeicoes"
+      "Dormir 7-8 horas",
+      "Movimento diario (caminhar, escada, tarefas)",
+      "Proteina em pelo menos 2 refeicoes"
     ],
 
     "desafio_7_dias": [
       { "dia": 1, "tarefa": "Caminhada 15 min + cortar refrigerante hoje" },
-      { "dia": 2, "tarefa": "Treino iniciante completo + 2L de agua" },
+      { "dia": 2, "tarefa": "Treino iniciante + 2L de agua" },
       { "dia": 3, "tarefa": "Dia sem doce + alongamento 10 min" },
-      { "dia": 4, "tarefa": "Treino + caminhar sempre que puder (escada se der)" },
-      { "dia": 5, "tarefa": "Dia sem fritura + 20 min de caminhada" },
-      { "dia": 6, "tarefa": "Treino intermediario leve (ou iniciante se cansar)" },
-      { "dia": 7, "tarefa": "Medir progresso (peso/medidas) + ajustar meta da semana" }
+      { "dia": 4, "tarefa": "Treino + escada quando der" },
+      { "dia": 5, "tarefa": "Dia sem fritura + caminhada 20 min" },
+      { "dia": 6, "tarefa": "Treino (intermediario leve ou iniciante)" },
+      { "dia": 7, "tarefa": "Avaliar progresso e ajustar meta da semana" }
     ],
 
     "motivacao": [
       "Consistencia vence intensidade.",
       "Comece pequeno, mas comece hoje.",
-      "Seu corpo muda quando sua rotina muda.",
       "Nao e sobre perfeicao. E sobre voltar pro caminho."
     ],
 
     "avisos": {
       "texto": [
-        "Isso e informativo e nao substitui medico/nutricionista.",
+        "Ferramenta informativa. Nao substitui medico/nutricionista.",
         "Se sentir dor forte, tontura ou falta de ar, pare e procure ajuda.",
-        "Progresso real e de semanas/meses, nao de 2 dias."
+        "Progresso real e de semanas/meses."
       ]
     }
   }
