@@ -1,0 +1,144 @@
+{
+  "meta": {
+    "versao": "1.0",
+    "disclaimer": "Ferramenta educativa. Plantas podem causar alergias e interações. Se estiver grávida/amamentando, tiver doenças crônicas ou usar remédios contínuos, procure orientação profissional."
+  },
+  "objetivos": {
+    "sono": {
+      "nome": "Sono (leve)",
+      "descricao": "Sugestões suaves para relaxar à noite."
+    },
+    "digestao": {
+      "nome": "Digestão / gases",
+      "descricao": "Opções comuns para desconforto leve após refeições."
+    },
+    "resfriado": {
+      "nome": "Resfriado leve / garganta",
+      "descricao": "Apoio para sintomas leves (não substitui avaliação)."
+    },
+    "estresse": {
+      "nome": "Estresse (leve)",
+      "descricao": "Sugestões suaves para relaxar durante o dia."
+    }
+  },
+  "chás": [
+    {
+      "id": "camomila",
+      "nome": "Camomila",
+      "nome_cientifico": "Matricaria chamomilla",
+      "objetivos": ["sono", "estresse"],
+      "preparo": {
+        "tipo": "infusao",
+        "quantidade": "1 colher de chá (ou 1 sachê)",
+        "agua_ml": 200,
+        "tempo_min": 5,
+        "como": "Despeje água quente e abafe. Coe antes de tomar."
+      },
+      "dose": "1 xícara à noite (ou 1–2 ao dia).",
+      "alertas": [
+        "Evite se você tem alergia a plantas da família Asteraceae (ex.: margarida, crisântemo).",
+        "Pode dar sonolência em algumas pessoas."
+      ],
+      "restricoes": {
+        "gravidez_amamentacao": "cautela",
+        "pressao_alta": "ok",
+        "antidepressivo": "cautela",
+        "anticoagulante": "cautela"
+      }
+    },
+    {
+      "id": "erva_cidreira",
+      "nome": "Erva-cidreira (capim-cidreira)",
+      "nome_cientifico": "Cymbopogon citratus",
+      "objetivos": ["sono", "estresse", "digestao"],
+      "preparo": {
+        "tipo": "infusao",
+        "quantidade": "1 colher de sopa (folhas picadas)",
+        "agua_ml": 200,
+        "tempo_min": 8,
+        "como": "Abafe bem para manter os óleos aromáticos."
+      },
+      "dose": "1 xícara (1–2 ao dia).",
+      "alertas": [
+        "Se der queda de pressão/tontura, reduza ou suspenda."
+      ],
+      "restricoes": {
+        "gravidez_amamentacao": "cautela",
+        "pressao_alta": "ok",
+        "antidepressivo": "ok",
+        "anticoagulante": "ok"
+      }
+    },
+    {
+      "id": "hortela",
+      "nome": "Hortelã",
+      "nome_cientifico": "Mentha sp.",
+      "objetivos": ["digestao", "resfriado"],
+      "preparo": {
+        "tipo": "infusao",
+        "quantidade": "1 colher de sopa (folhas)",
+        "agua_ml": 200,
+        "tempo_min": 6,
+        "como": "Abafe e coe."
+      },
+      "dose": "1 xícara após refeições (até 2 ao dia).",
+      "alertas": [
+        "Pode piorar refluxo em algumas pessoas."
+      ],
+      "restricoes": {
+        "gravidez_amamentacao": "cautela",
+        "pressao_alta": "ok",
+        "antidepressivo": "ok",
+        "anticoagulante": "ok"
+      }
+    },
+    {
+      "id": "gengibre",
+      "nome": "Gengibre",
+      "nome_cientifico": "Zingiber officinale",
+      "objetivos": ["resfriado", "digestao"],
+      "preparo": {
+        "tipo": "decoccao",
+        "quantidade": "2–3 fatias finas",
+        "agua_ml": 250,
+        "tempo_min": 8,
+        "como": "Ferva as fatias por alguns minutos, desligue e descanse."
+      },
+      "dose": "1 xícara ao dia por 2–3 dias (uso curto).",
+      "alertas": [
+        "Pode irritar estômago em alguns.",
+        "Cautela se você usa anticoagulante."
+      ],
+      "restricoes": {
+        "gravidez_amamentacao": "cautela",
+        "pressao_alta": "ok",
+        "antidepressivo": "ok",
+        "anticoagulante": "evitar"
+      }
+    },
+    {
+      "id": "mel_com_limao",
+      "nome": "Mel com limão (apoio)",
+      "nome_cientifico": "",
+      "objetivos": ["resfriado"],
+      "preparo": {
+        "tipo": "mistura",
+        "quantidade": "1 colher de chá de mel + gotas de limão",
+        "agua_ml": 200,
+        "tempo_min": 0,
+        "como": "Misture em água morna (não fervendo)."
+      },
+      "dose": "1–2x ao dia (não usar em menores de 1 ano).",
+      "alertas": [
+        "Mel é contraindicado para bebês < 1 ano.",
+        "Se você tem gastrite/refluxo, limão pode irritar."
+      ],
+      "restricoes": {
+        "gravidez_amamentacao": "ok",
+        "pressao_alta": "ok",
+        "antidepressivo": "ok",
+        "anticoagulante": "ok"
+      }
+    }
+  ]
+}
