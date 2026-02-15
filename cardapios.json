@@ -1,6 +1,6 @@
 {
   "meta": {
-    "versao": "1.0",
+    "versao": "2.0",
     "aviso": "Sugestão educativa. Ajuste por alergias, restrições e orientação profissional."
   },
   "formatos": {
@@ -11,69 +11,81 @@
         "cafe": [
           {
             "titulo": "Cuscuz com ovo + café",
-            "itens": ["Cuscuz", "1–2 ovos", "Café (sem açúcar ou pouco açúcar)"],
-            "substituicoes": ["Pão francês no lugar do cuscuz", "Ovo mexido ou cozido"]
+            "itens": ["Cuscuz (1 porção)", "Ovos (2 unidades)", "Café sem açúcar"],
+            "substituicoes": ["Pão francês no lugar do cuscuz", "Ovo mexido ou cozido"],
+            "kcal_total": 345
           },
           {
             "titulo": "Pão com pasta de sardinha + fruta",
-            "itens": ["Pão", "Sardinha amassada", "Tomate/cebola (opcional)", "1 fruta"],
-            "substituicoes": ["Atum no lugar da sardinha", "Banana/maçã/laranja"]
+            "itens": ["Pão (1 unidade)", "Sardinha (1 porção)", "Tomate/cebola (opcional)", "1 fruta"],
+            "substituicoes": ["Atum no lugar da sardinha", "Banana/maçã/laranja"],
+            "kcal_total": 430
           },
           {
             "titulo": "Vitamina simples + aveia",
-            "itens": ["Leite ou bebida vegetal", "Banana", "Aveia"],
-            "substituicoes": ["Mamão no lugar da banana", "Água + banana + aveia (se preferir)"]
+            "itens": ["Leite (1 copo) ou bebida vegetal", "Banana (1 unidade)", "Aveia (2 colheres)"],
+            "substituicoes": ["Mamão no lugar da banana", "Água + banana + aveia (se preferir)"],
+            "kcal_total": 360
           }
         ],
         "almoco": [
           {
             "titulo": "Arroz + feijão + frango + salada",
-            "itens": ["Arroz", "Feijão", "Frango grelhado/ensopado", "Salada (alface/tomate)"],
-            "substituicoes": ["Ovo no lugar do frango", "Legume cozido no lugar da salada"]
+            "itens": ["Arroz (1 porção)", "Feijão (1 concha)", "Frango (1 porção)", "Salada (livre)"],
+            "substituicoes": ["Ovo no lugar do frango", "Legume cozido no lugar da salada"],
+            "kcal_total": 650
           },
           {
             "titulo": "Macarrão com molho caseiro + proteína",
-            "itens": ["Macarrão", "Molho de tomate", "Carne moída ou frango desfiado", "Salada simples"],
-            "substituicoes": ["Sardinha no molho", "Legumes picados no molho"]
+            "itens": ["Macarrão (1 porção)", "Molho de tomate caseiro", "Carne moída ou frango desfiado", "Salada simples"],
+            "substituicoes": ["Sardinha no molho", "Legumes picados no molho"],
+            "kcal_total": 720
           },
           {
             "titulo": "Prato feito leve",
-            "itens": ["Arroz", "Feijão", "Abóbora/chuchu refogado", "Bife/ovo", "1 fruta"],
-            "substituicoes": ["Trocar bife por frango", "Trocar fruta por salada extra"]
+            "itens": ["Arroz (1 porção)", "Feijão (1 concha)", "Legume refogado", "Bife/ovo (1 porção)", "1 fruta"],
+            "substituicoes": ["Trocar bife por frango", "Trocar fruta por salada extra"],
+            "kcal_total": 780
           }
         ],
         "lanche": [
           {
             "titulo": "Iogurte + banana + aveia",
-            "itens": ["Iogurte natural", "Banana", "Aveia/canela (opcional)"],
-            "substituicoes": ["Coalhada no lugar do iogurte", "Maçã no lugar da banana"]
+            "itens": ["Iogurte natural (1 pote)", "Banana (1 unidade)", "Aveia (1 colher)"],
+            "substituicoes": ["Coalhada no lugar do iogurte", "Maçã no lugar da banana"],
+            "kcal_total": 310
           },
           {
             "titulo": "Pão + queijo + chá",
-            "itens": ["Pão", "Queijo (porção pequena)", "Chá (camomila/erva-doce)"],
-            "substituicoes": ["Tapioca no lugar do pão", "Requeijão light (se usar)"]
+            "itens": ["Pão (1 unidade)", "Queijo (1 fatia)", "Chá sem açúcar"],
+            "substituicoes": ["Tapioca no lugar do pão", "Requeijão light (se usar)"],
+            "kcal_total": 300
           },
           {
             "titulo": "Fruta + castanhas (pouco)",
             "itens": ["1 fruta", "Castanhas/amendoim (1 punhado pequeno)"],
-            "substituicoes": ["Pipoca feita na panela", "Biscoito de aveia caseiro"]
+            "substituicoes": ["Pipoca feita na panela", "Biscoito de aveia caseiro"],
+            "kcal_total": 260
           }
         ],
         "jantar": [
           {
             "titulo": "Sopa de legumes + ovo",
-            "itens": ["Legumes (batata, cenoura, chuchu)", "Temperos", "1 ovo"],
-            "substituicoes": ["Frango desfiado no lugar do ovo", "Creme de abóbora"]
+            "itens": ["Sopa de legumes (1 prato)", "Ovo (1 unidade)"],
+            "substituicoes": ["Frango desfiado no lugar do ovo", "Creme de abóbora"],
+            "kcal_total": 380
           },
           {
             "titulo": "Arroz + feijão + salada + proteína leve",
-            "itens": ["Arroz", "Feijão", "Salada", "Frango/ovo"],
-            "substituicoes": ["Peixe quando tiver", "Legumes refogados"]
+            "itens": ["Arroz (meia porção)", "Feijão (meia concha)", "Salada (livre)", "Frango/ovo (1 porção)"],
+            "substituicoes": ["Peixe quando tiver", "Legumes refogados"],
+            "kcal_total": 520
           },
           {
             "titulo": "Tapioca recheada + fruta",
-            "itens": ["Tapioca", "Recheio (ovo/queijo)", "1 fruta"],
-            "substituicoes": ["Cuscuz no lugar da tapioca", "Iogurte no lugar da fruta"]
+            "itens": ["Tapioca (1 unidade)", "Recheio (ovo/queijo)", "1 fruta"],
+            "substituicoes": ["Cuscuz no lugar da tapioca", "Iogurte no lugar da fruta"],
+            "kcal_total": 520
           }
         ]
       }
@@ -86,69 +98,81 @@
         "cafe": [
           {
             "titulo": "Mamão + aveia + café",
-            "itens": ["Mamão", "Aveia", "Café"],
-            "substituicoes": ["Iogurte natural com mamão", "Banana se não tiver mamão"]
+            "itens": ["Mamão (1 porção)", "Aveia (2 colheres)", "Café sem açúcar"],
+            "substituicoes": ["Iogurte natural com mamão", "Banana se não tiver mamão"],
+            "kcal_total": 260
           },
           {
             "titulo": "Ovos mexidos + fruta",
-            "itens": ["2 ovos", "1 fruta (maçã/pera/laranja)"],
-            "substituicoes": ["Omelete com tomate", "Cuscuz pequeno + ovo"]
+            "itens": ["Ovos (2 unidades)", "1 fruta"],
+            "substituicoes": ["Omelete com tomate", "Cuscuz pequeno + ovo"],
+            "kcal_total": 280
           },
           {
             "titulo": "Tapioca leve + chá",
-            "itens": ["Tapioca", "Recheio simples (ovo/queijo branco)", "Chá"],
-            "substituicoes": ["Pão integral", "Iogurte + fruta"]
+            "itens": ["Tapioca (1 unidade)", "Recheio simples (ovo/queijo branco)", "Chá sem açúcar"],
+            "substituicoes": ["Pão integral", "Iogurte + fruta"],
+            "kcal_total": 380
           }
         ],
         "almoco": [
           {
             "titulo": "Arroz + feijão + salada grande",
-            "itens": ["Arroz", "Feijão", "Salada grande (folhas + tomate)", "Frango/peixe"],
-            "substituicoes": ["Batata doce no lugar do arroz", "Ovo no lugar do peixe"]
+            "itens": ["Arroz (meia porção)", "Feijão (1 concha)", "Salada grande (livre)", "Frango/peixe (1 porção)"],
+            "substituicoes": ["Batata doce no lugar do arroz", "Ovo no lugar do peixe"],
+            "kcal_total": 580
           },
           {
-            "titulo": "Prato com legumes + proteína",
-            "itens": ["Legumes cozidos/refogados", "Proteína (frango/ovo)", "Salada"],
-            "substituicoes": ["Abobrinha/berinjela refogada", "Carne magra (pouco)"]
+            "titulo": "Legumes + proteína + salada",
+            "itens": ["Legumes cozidos/refogados", "Proteína (frango/ovo)", "Salada (livre)"],
+            "substituicoes": ["Abobrinha/berinjela refogada", "Carne magra (pouco)"],
+            "kcal_total": 480
           },
           {
             "titulo": "Feijão + abóbora + frango",
-            "itens": ["Feijão", "Abóbora", "Frango", "Verduras"],
-            "substituicoes": ["Lentilha no lugar do feijão", "Ovo no lugar do frango"]
+            "itens": ["Feijão (1 concha)", "Abóbora (1 porção)", "Frango (1 porção)", "Verduras (livre)"],
+            "substituicoes": ["Lentilha no lugar do feijão", "Ovo no lugar do frango"],
+            "kcal_total": 520
           }
         ],
         "lanche": [
           {
             "titulo": "Chá + fruta",
-            "itens": ["Chá (hortelã/erva-doce)", "1 fruta"],
-            "substituicoes": ["Água com limão (se tolerar)", "Iogurte natural"]
+            "itens": ["Chá sem açúcar", "1 fruta"],
+            "substituicoes": ["Água com limão (se tolerar)", "Iogurte natural"],
+            "kcal_total": 120
           },
           {
             "titulo": "Iogurte natural + chia",
-            "itens": ["Iogurte natural", "Chia (1 colher)", "Canela (opcional)"],
-            "substituicoes": ["Coalhada", "Aveia no lugar da chia"]
+            "itens": ["Iogurte natural (1 pote)", "Chia (1 colher)", "Canela (opcional)"],
+            "substituicoes": ["Coalhada", "Aveia no lugar da chia"],
+            "kcal_total": 210
           },
           {
             "titulo": "Pipoca na panela",
-            "itens": ["Milho de pipoca", "Pouco óleo", "Pouco sal"],
-            "substituicoes": ["Sem sal", "Temperos naturais (páprica)"]
+            "itens": ["Milho de pipoca (1 porção)", "Pouco óleo", "Pouco sal (opcional)"],
+            "substituicoes": ["Sem sal", "Temperos naturais (páprica)"],
+            "kcal_total": 170
           }
         ],
         "jantar": [
           {
             "titulo": "Sopa leve + salada",
-            "itens": ["Sopa de legumes", "Salada"],
-            "substituicoes": ["Caldo de abóbora", "Omelete com legumes"]
+            "itens": ["Sopa de legumes (1 prato)", "Salada (livre)"],
+            "substituicoes": ["Caldo de abóbora", "Omelete com legumes"],
+            "kcal_total": 320
           },
           {
             "titulo": "Omelete com legumes",
-            "itens": ["2 ovos", "Tomate/cebola", "Folhas"],
-            "substituicoes": ["Frango desfiado", "Tapioca pequena"]
+            "itens": ["Ovos (2 unidades)", "Tomate/cebola/legumes", "Folhas (livre)"],
+            "substituicoes": ["Frango desfiado", "Tapioca pequena"],
+            "kcal_total": 360
           },
           {
             "titulo": "Salada reforçada",
-            "itens": ["Folhas", "Tomate", "Ovo/atum", "Azeite (pouco)"],
-            "substituicoes": ["Frango no lugar do atum", "Feijão por cima da salada"]
+            "itens": ["Folhas (livre)", "Tomate", "Ovo/atum (1 porção)", "Azeite (pouco)"],
+            "substituicoes": ["Frango no lugar do atum", "Feijão por cima da salada"],
+            "kcal_total": 420
           }
         ]
       }
@@ -161,69 +185,81 @@
         "cafe": [
           {
             "titulo": "Fruta + aveia + café",
-            "itens": ["1 fruta", "Aveia", "Café"],
-            "substituicoes": ["Iogurte natural", "Pão integral sem muito sal"]
+            "itens": ["1 fruta", "Aveia (2 colheres)", "Café sem açúcar"],
+            "substituicoes": ["Iogurte natural", "Pão integral (pouco sal)"],
+            "kcal_total": 260
           },
           {
             "titulo": "Omelete simples + fruta",
-            "itens": ["Omelete (pouco sal)", "1 fruta"],
-            "substituicoes": ["Ovo cozido", "Tapioca"]
+            "itens": ["Omelete (2 ovos, pouco sal)", "1 fruta"],
+            "substituicoes": ["Ovo cozido", "Tapioca"],
+            "kcal_total": 320
           },
           {
             "titulo": "Iogurte natural + banana",
-            "itens": ["Iogurte natural", "Banana"],
-            "substituicoes": ["Mamão", "Aveia"]
+            "itens": ["Iogurte natural (1 pote)", "Banana (1 unidade)"],
+            "substituicoes": ["Mamão", "Aveia"],
+            "kcal_total": 240
           }
         ],
         "almoco": [
           {
             "titulo": "Arroz + feijão + salada + frango",
-            "itens": ["Arroz", "Feijão", "Salada", "Frango"],
-            "substituicoes": ["Peixe", "Ovo"]
+            "itens": ["Arroz (meia porção)", "Feijão (1 concha)", "Salada (livre)", "Frango (1 porção)"],
+            "substituicoes": ["Peixe", "Ovo"],
+            "kcal_total": 580
           },
           {
             "titulo": "Legumes + proteína + feijão",
-            "itens": ["Legumes", "Proteína", "Feijão"],
-            "substituicoes": ["Lentilha", "Grão-de-bico (se usar)"]
+            "itens": ["Legumes (1 porção)", "Proteína (1 porção)", "Feijão (meia concha)"],
+            "substituicoes": ["Lentilha", "Grão-de-bico (se usar)"],
+            "kcal_total": 520
           },
           {
             "titulo": "Macarrão com molho caseiro e pouco sal",
-            "itens": ["Macarrão", "Molho de tomate caseiro", "Salada"],
-            "substituicoes": ["Legumes no molho", "Frango desfiado"]
+            "itens": ["Macarrão (1 porção)", "Molho de tomate caseiro", "Salada (livre)"],
+            "substituicoes": ["Legumes no molho", "Frango desfiado"],
+            "kcal_total": 560
           }
         ],
         "lanche": [
           {
             "titulo": "Fruta + água",
             "itens": ["1 fruta", "Água"],
-            "substituicoes": ["Iogurte natural", "Castanhas (pouco)"]
+            "substituicoes": ["Iogurte natural", "Castanhas (pouco)"],
+            "kcal_total": 100
           },
           {
-            "titulo": "Pão caseiro/Integral + ovo",
-            "itens": ["Pão (pouco sal)", "Ovo"],
-            "substituicoes": ["Tapioca", "Cuscuz"]
+            "titulo": "Pão (pouco sal) + ovo",
+            "itens": ["Pão (1 unidade)", "Ovo (1 unidade)"],
+            "substituicoes": ["Tapioca", "Cuscuz"],
+            "kcal_total": 280
           },
           {
             "titulo": "Chá sem açúcar",
-            "itens": ["Chá", "1 fruta (opcional)"],
-            "substituicoes": ["Água aromatizada", "Iogurte natural"]
+            "itens": ["Chá sem açúcar", "1 fruta (opcional)"],
+            "substituicoes": ["Água aromatizada", "Iogurte natural"],
+            "kcal_total": 30
           }
         ],
         "jantar": [
           {
             "titulo": "Sopa de legumes",
-            "itens": ["Legumes", "Temperos naturais (alho, cebola, cheiro-verde)"],
-            "substituicoes": ["Omelete", "Salada reforçada"]
+            "itens": ["Sopa de legumes (1 prato)", "Temperos naturais"],
+            "substituicoes": ["Omelete", "Salada reforçada"],
+            "kcal_total": 280
           },
           {
             "titulo": "Salada reforçada + proteína",
-            "itens": ["Salada", "Ovo/Frango", "Azeite (pouco)"],
-            "substituicoes": ["Atum", "Feijão por cima"]
+            "itens": ["Salada (livre)", "Ovo/Frango (1 porção)", "Azeite (pouco)"],
+            "substituicoes": ["Atum", "Feijão por cima"],
+            "kcal_total": 420
           },
           {
             "titulo": "Arroz + feijão + legumes",
-            "itens": ["Arroz", "Feijão", "Legumes"],
-            "substituicoes": ["Batata doce", "Abóbora"]
+            "itens": ["Arroz (meia porção)", "Feijão (meia concha)", "Legumes (1 porção)"],
+            "substituicoes": ["Batata doce", "Abóbora"],
+            "kcal_total": 480
           }
         ]
       }
@@ -236,69 +272,81 @@
         "cafe": [
           {
             "titulo": "Ovos + fruta",
-            "itens": ["Ovos", "1 fruta"],
-            "substituicoes": ["Iogurte natural", "Aveia"]
+            "itens": ["Ovos (2 unidades)", "1 fruta"],
+            "substituicoes": ["Iogurte natural", "Aveia"],
+            "kcal_total": 280
           },
           {
             "titulo": "Vitamina de banana + aveia",
-            "itens": ["Banana", "Leite/bebida vegetal", "Aveia"],
-            "substituicoes": ["Mamão", "Canela (opcional)"]
+            "itens": ["Banana (1 unidade)", "Leite/bebida vegetal (1 copo)", "Aveia (2 colheres)"],
+            "substituicoes": ["Mamão", "Canela (opcional)"],
+            "kcal_total": 360
           },
           {
             "titulo": "Tapioca simples",
-            "itens": ["Tapioca", "Recheio leve (queijo branco/ovo)"],
-            "substituicoes": ["Cuscuz", "Pão integral"]
+            "itens": ["Tapioca (1 unidade)", "Recheio leve (queijo branco/ovo)"],
+            "substituicoes": ["Cuscuz", "Pão integral"],
+            "kcal_total": 380
           }
         ],
         "almoco": [
           {
             "titulo": "Prato simples e equilibrado",
-            "itens": ["Arroz", "Feijão", "Frango/peixe", "Salada"],
-            "substituicoes": ["Carne magra (pouco)", "Ovo"]
+            "itens": ["Arroz (meia porção)", "Feijão (1 concha)", "Frango/peixe (1 porção)", "Salada (livre)"],
+            "substituicoes": ["Carne magra (pouco)", "Ovo"],
+            "kcal_total": 580
           },
           {
             "titulo": "Legumes + proteína",
-            "itens": ["Legumes", "Frango/ovo", "Feijão (pouco)"],
-            "substituicoes": ["Sopa no almoço", "Salada reforçada"]
+            "itens": ["Legumes (1 porção)", "Frango/ovo (1 porção)", "Feijão (meia concha)"],
+            "substituicoes": ["Sopa no almoço", "Salada reforçada"],
+            "kcal_total": 520
           },
           {
             "titulo": "Macarrão leve + salada",
-            "itens": ["Macarrão", "Molho caseiro", "Salada"],
-            "substituicoes": ["Arroz + feijão", "Frango desfiado"]
+            "itens": ["Macarrão (1 porção)", "Molho caseiro", "Salada (livre)"],
+            "substituicoes": ["Arroz + feijão", "Frango desfiado"],
+            "kcal_total": 560
           }
         ],
         "lanche": [
           {
             "titulo": "Chá de camomila + fruta",
             "itens": ["Chá de camomila", "1 fruta"],
-            "substituicoes": ["Erva-doce", "Maracujá (se tolerar)"]
+            "substituicoes": ["Erva-doce", "Maracujá (se tolerar)"],
+            "kcal_total": 120
           },
           {
             "titulo": "Iogurte natural + aveia",
-            "itens": ["Iogurte natural", "Aveia"],
-            "substituicoes": ["Coalhada", "Chia"]
+            "itens": ["Iogurte natural (1 pote)", "Aveia (1 colher)"],
+            "substituicoes": ["Coalhada", "Chia"],
+            "kcal_total": 220
           },
           {
             "titulo": "Pão pequeno + queijo branco",
-            "itens": ["Pão pequeno", "Queijo branco"],
-            "substituicoes": ["Tapioca pequena", "Ovo cozido"]
+            "itens": ["Pão pequeno (1 unidade)", "Queijo branco (1 porção)"],
+            "substituicoes": ["Tapioca pequena", "Ovo cozido"],
+            "kcal_total": 280
           }
         ],
         "jantar": [
           {
             "titulo": "Sopa leve",
-            "itens": ["Sopa de legumes", "Temperos naturais"],
-            "substituicoes": ["Caldo de abóbora", "Canja leve"]
+            "itens": ["Sopa de legumes (1 prato)", "Temperos naturais"],
+            "substituicoes": ["Caldo de abóbora", "Canja leve"],
+            "kcal_total": 260
           },
           {
             "titulo": "Omelete leve + salada",
-            "itens": ["Omelete", "Salada"],
-            "substituicoes": ["Tapioca pequena", "Iogurte natural"]
+            "itens": ["Omelete (2 ovos)", "Salada (livre)"],
+            "substituicoes": ["Tapioca pequena", "Iogurte natural"],
+            "kcal_total": 360
           },
           {
             "titulo": "Salada reforçada",
-            "itens": ["Folhas", "Tomate", "Ovo/Frango", "Azeite (pouco)"],
-            "substituicoes": ["Atum", "Feijão por cima"]
+            "itens": ["Folhas (livre)", "Tomate", "Ovo/Frango (1 porção)", "Azeite (pouco)"],
+            "substituicoes": ["Atum", "Feijão por cima"],
+            "kcal_total": 420
           }
         ]
       }
