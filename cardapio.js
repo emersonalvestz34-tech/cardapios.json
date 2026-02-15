@@ -1,8 +1,7 @@
 (function () {
-  // 1) COLE AQUI o link RAW do seu JSON no GitHub:
-  // Exemplo:
-  // const DATA_URL = "https://github.com/emersonalvestz34-tech/cardapios.json/tree/main";
-  const DATA_URL = "https://raw.githubusercontent.com/emersonalvestz34-tech/cardapios.json/main/cardapios.json";
+
+  // JSON via jsDelivr (mais seguro para Blogger)
+  const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/cardapios.json";
 
   const el = (id) => document.getElementById(id);
 
@@ -75,7 +74,6 @@
 
     el("psbResultado").innerHTML = html;
 
-    // Texto para copiar
     const copyText =
 `🍽️ Cardápio do Dia — ${f.nome}
 
@@ -100,7 +98,6 @@ Obs.: ${data.meta?.aviso || ""}`.trim();
     if (navigator.clipboard && window.isSecureContext) {
       return navigator.clipboard.writeText(text);
     }
-    // fallback
     const ta = document.createElement("textarea");
     ta.value = text;
     ta.style.position = "fixed";
@@ -118,7 +115,7 @@ Obs.: ${data.meta?.aviso || ""}`.trim();
       el("psbStatus").textContent = "Carregando…";
 
       const res = await fetch(DATA_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error("Falha ao baixar JSON. Confira o link RAW.");
+      if (!res.ok) throw new Error("Falha ao baixar JSON.");
       const data = await res.json();
 
       buildSelect(data.formatos);
@@ -134,10 +131,12 @@ Obs.: ${data.meta?.aviso || ""}`.trim();
 
       generateCardapio(data);
       el("psbStatus").textContent = "";
+
     } catch (e) {
       el("psbStatus").textContent = "Erro: " + (e.message || e);
     }
   }
 
   document.addEventListener("DOMContentLoaded", init);
+
 })();
