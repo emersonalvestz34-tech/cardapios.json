@@ -1,140 +1,140 @@
 (function () {
 
-  // JSON via jsDelivr (mais seguro para Blogger)
   const DATA_URL = "https://cdn.jsdelivr.net/gh/emersonalvestz34-tech/cardapios.json@main/cardapios.json";
 
   const el = (id) => document.getElementById(id);
+  let lastGenerated = null;
 
   function pickRandom(arr) {
     return arr[Math.floor(Math.random() * arr.length)];
   }
 
-  function escapeHtml(str) {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
   function renderMeal(title, mealObj) {
-    const items = (mealObj.itens || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
-    const subs = (mealObj.substituicoes || []).map((x) => `<li>${escapeHtml(x)}</li>`).join("");
-
     return `
       <div class="psb-meal">
-        <h4>${escapeHtml(title)}: <span>${escapeHtml(mealObj.titulo || "")}</span></h4>
-        <div class="psb-cols">
-          <div>
-            <div class="psb-label">O que entra</div>
-            <ul>${items}</ul>
-          </div>
-          <div>
-            <div class="psb-label">Substituições</div>
-            <ul>${subs || "<li>—</li>"}</ul>
-          </div>
-        </div>
+        <h4>${title}: <span>${mealObj.titulo}</span></h4>
+        <ul>${mealObj.itens.map(i => `<li>${i}</li>`).join("")}</ul>
       </div>
     `;
   }
 
-  function buildSelect(formatos) {
-    const select = el("psbFormato");
-    select.innerHTML = "";
-
-    Object.keys(formatos).forEach((key) => {
-      const opt = document.createElement("option");
-      opt.value = key;
-      opt.textContent = formatos[key].nome;
-      select.appendChild(opt);
-    });
-  }
-
-  function generateCardapio(data) {
-    const formatos = data.formatos;
+  function generateDay(data) {
     const key = el("psbFormato").value;
-    const f = formatos[key];
-
-    el("psbDesc").textContent = f.descricao || "";
-
+    const f = data.formatos[key];
     const r = f.refeicoes;
-    const cafe = pickRandom(r.cafe);
-    const almoco = pickRandom(r.almoco);
-    const lanche = pickRandom(r.lanche);
-    const jantar = pickRandom(r.jantar);
 
-    const html = `
-      ${renderMeal("Café", cafe)}
-      ${renderMeal("Almoço", almoco)}
-      ${renderMeal("Lanche", lanche)}
-      ${renderMeal("Jantar", jantar)}
-      <div class="psb-footnote">${escapeHtml(data.meta?.aviso || "")}</div>
-    `;
+    const day = {
+      nome: f.nome,
+      cafe: pickRandom(r.cafe),
+      almoco: pickRandom(r.almoco),
+      lanche: pickRandom(r.lanche),
+      jantar: pickRandom(r.jantar)
+    };
 
-    el("psbResultado").innerHTML = html;
+    lastGenerated = { tipo: "dia", conteudo: day };
+    localStorage.setItem("psbCardapio", JSON.stringify(lastGenerated));
 
-    const copyText =
-`🍽️ Cardápio do Dia — ${f.nome}
-
-☕ Café: ${cafe.titulo}
-- ${cafe.itens.join(", ")}
-
-🍛 Almoço: ${almoco.titulo}
-- ${almoco.itens.join(", ")}
-
-🍌 Lanche: ${lanche.titulo}
-- ${lanche.itens.join(", ")}
-
-🌙 Jantar: ${jantar.titulo}
-- ${jantar.itens.join(", ")}
-
-Obs.: ${data.meta?.aviso || ""}`.trim();
-
-    el("psbCopy").dataset.copy = copyText;
+    renderDay(day);
   }
 
-  function copyToClipboard(text) {
-    if (navigator.clipboard && window.isSecureContext) {
-      return navigator.clipboard.writeText(text);
+  function renderDay(day) {
+    el("psbResultado").innerHTML = `
+      ${renderMeal("☕ Café", day.cafe)}
+      ${renderMeal("🍛 Almoço", day.almoco)}
+      ${renderMeal("🍌 Lanche", day.lanche)}
+      ${renderMeal("🌙 Jantar", day.jantar)}
+    `;
+  }
+
+  function generateWeek(data) {
+    const key = el("psbFormato").value;
+    const f = data.formatos[key];
+    const r = f.refeicoes;
+
+    const week = [];
+
+    for (let i = 0; i < 7; i++) {
+      week.push({
+        cafe: pickRandom(r.cafe),
+        almoco: pickRandom(r.almoco),
+        lanche: pickRandom(r.lanche),
+        jantar: pickRandom(r.jantar)
+      });
     }
-    const ta = document.createElement("textarea");
-    ta.value = text;
-    ta.style.position = "fixed";
-    ta.style.left = "-9999px";
-    document.body.appendChild(ta);
-    ta.focus();
-    ta.select();
-    document.execCommand("copy");
-    document.body.removeChild(ta);
-    return Promise.resolve();
+
+    lastGenerated = { tipo: "semana", conteudo: week };
+    localStorage.setItem("psbCardapio", JSON.stringify(lastGenerated));
+
+    renderWeek(week);
+  }
+
+  function renderWeek(week) {
+    el("psbResultado").innerHTML = week.map((day, i) => `
+      <div class="psb-week">
+        <h3>📅 Dia ${i + 1}</h3>
+        ${renderMeal("☕ Café", day.cafe)}
+        ${renderMeal("🍛 Almoço", day.almoco)}
+        ${renderMeal("🍌 Lanche", day.lanche)}
+        ${renderMeal("🌙 Jantar", day.jantar)}
+      </div>
+    `).join("");
+  }
+
+  function generateShoppingList() {
+    if (!lastGenerated) return;
+
+    let items = [];
+
+    if (lastGenerated.tipo === "dia") {
+      Object.values(lastGenerated.conteudo).forEach(meal => {
+        if (meal.itens) items.push(...meal.itens);
+      });
+    } else {
+      lastGenerated.conteudo.forEach(day => {
+        Object.values(day).forEach(meal => {
+          items.push(...meal.itens);
+        });
+      });
+    }
+
+    const unique = [...new Set(items)];
+
+    el("psbResultado").innerHTML = `
+      <div class="psb-shopping">
+        <h3>🛒 Lista de Compras</h3>
+        <ul>${unique.map(i => `<li>${i}</li>`).join("")}</ul>
+      </div>
+    `;
+  }
+
+  function loadSaved() {
+    const saved = localStorage.getItem("psbCardapio");
+    if (!saved) return;
+
+    const data = JSON.parse(saved);
+    lastGenerated = data;
+
+    if (data.tipo === "dia") renderDay(data.conteudo);
+    if (data.tipo === "semana") renderWeek(data.conteudo);
   }
 
   async function init() {
-    try {
-      el("psbStatus").textContent = "Carregando…";
+    const res = await fetch(DATA_URL);
+    const data = await res.json();
 
-      const res = await fetch(DATA_URL, { cache: "no-store" });
-      if (!res.ok) throw new Error("Falha ao baixar JSON.");
-      const data = await res.json();
+    const select = el("psbFormato");
+    Object.keys(data.formatos).forEach(key => {
+      const opt = document.createElement("option");
+      opt.value = key;
+      opt.textContent = data.formatos[key].nome;
+      select.appendChild(opt);
+    });
 
-      buildSelect(data.formatos);
+    el("psbGerar").onclick = () => generateDay(data);
+    el("psbSemana").onclick = () => generateWeek(data);
+    el("psbLista").onclick = () => generateShoppingList();
 
-      el("psbGerar").addEventListener("click", () => generateCardapio(data));
-      el("psbFormato").addEventListener("change", () => generateCardapio(data));
-      el("psbCopiar").addEventListener("click", async () => {
-        const text = el("psbCopy").dataset.copy || "";
-        await copyToClipboard(text);
-        el("psbStatus").textContent = "Copiado ✅";
-        setTimeout(() => (el("psbStatus").textContent = ""), 1500);
-      });
-
-      generateCardapio(data);
-      el("psbStatus").textContent = "";
-
-    } catch (e) {
-      el("psbStatus").textContent = "Erro: " + (e.message || e);
-    }
+    loadSaved();
   }
 
   document.addEventListener("DOMContentLoaded", init);
