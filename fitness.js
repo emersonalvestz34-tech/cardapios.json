@@ -120,3 +120,169 @@
 
     if (!peso || !alturaCm || !idade) {
       alert("Preencha peso, altura e idade.");
+      return;
+    }
+
+    dias = isNaN(dias) ? 0 : dias;
+    tempo = isNaN(tempo) ? 0 : tempo;
+
+    var imc = calcIMC(peso, alturaCm);
+    var faixa = classifyIMC(imc, cfg.fitness.imc.faixas);
+
+    var pi = calcPesoIdealRange(alturaCm, cfg.fitness.peso_ideal.imc_min, cfg.fitness.peso_ideal.imc_max);
+
+    var aguaL = calcAguaLitros(peso, cfg.fitness.agua.ml_por_kg);
+
+    var tmb = calcTMB(peso, alturaCm, idade, sexo);
+    var fatorObj = pickFactorByDays(dias, cfg.fitness.tdee.mapa_por_dias_treino);
+    var tdee = tmb * fatorObj.factor;
+
+    var regra = cfg.fitness.objetivo_kcal.regras[objetivo] || cfg.fitness.objetivo_kcal.regras.manter;
+    var metaKcal = tdee + regra.ajuste_kcal_dia;
+
+    // deficit positivo = emagrecimento
+    var deficitDia = tdee - metaKcal;
+    deficitDia = clamp(deficitDia, cfg.fitness.objetivo_kcal.limites_deficit_dia.min, cfg.fitness.objetivo_kcal.limites_deficit_dia.max);
+
+    var kgSemana = (deficitDia * 7) / cfg.fitness.objetivo_kcal.kcal_por_kg;
+    var kgMes = kgSemana * 4.3;
+
+    // estimativa treino semanal usando MET medio (nao e regra, e so informativo)
+    var metMedioTreino = 5.0;
+    var kcalTreinoSemana = Math.round(calcCaloriesByMET(metMedioTreino, peso, Math.max(0, tempo) * Math.max(0, dias)));
+
+    $("psbKpis").innerHTML =
+      buildKPI("IMC", round(imc, 2)) +
+      buildKPI("Classificacao", faixa.titulo) +
+      buildKPI("Peso ideal", round(pi.min, 1) + " a " + round(pi.max, 1) + " kg") +
+      buildKPI("Agua/dia", round(aguaL, 2) + " L") +
+      buildKPI("TMB", Math.round(tmb) + " kcal") +
+      buildKPI("Gasto diario", Math.round(tdee) + " kcal (" + fatorObj.label + ")") +
+      buildKPI("Deficit/dia", Math.round(deficitDia) + " kcal") +
+      buildKPI("Est. kg/mes", round(kgMes, 2) + " kg");
+
+    $("psbRecom").textContent = faixa.recomendacao + " " + (regra.texto || "");
+    $("psbTreino").innerHTML = renderTreino(nivel);
+
+    var h = cfg.fitness.habitos_diarios || [];
+    $("psbHabitos").innerHTML = h.map(function (x) { return "<li>" + x + "</li>"; }).join("");
+
+    var d = cfg.fitness.desafio_7_dias || [];
+    $("psbDesafio").innerHTML = d.map(function (x) { return "<li><b>Dia " + x.dia + ":</b> " + x.tarefa + "</li>"; }).join("");
+
+    $("psbMotiv").textContent = pickMotiv();
+
+    var a = (cfg.fitness.avisos && cfg.fitness.avisos.texto) ? cfg.fitness.avisos.texto : [];
+    $("psbWarn").innerHTML = "<b>Avisos</b><ul style='margin:8px 0 0 18px'>" + a.map(function (x) { return "<li>" + x + "</li>"; }).join("") + "</ul>";
+
+    $("psbResults").style.display = "block";
+
+    try {
+      localStorage.setItem("psb_fitness_last", JSON.stringify({
+        peso: peso, alturaCm: alturaCm, idade: idade, sexo: sexo, nivel: nivel, dias: dias, tempo: tempo, objetivo: objetivo
+      }));
+    } catch (e) { }
+  }
+
+  function metaMensal() {
+    if (!cfg) return;
+
+    var peso = parseFloat($("psbPeso").value);
+    var alturaCm = parseFloat($("psbAltura").value);
+    var idade = parseInt($("psbIdade").value, 10);
+    var sexo = $("psbSexo").value;
+    var dias = parseInt($("psbDias").value, 10);
+
+    if (!peso || !alturaCm || !idade) {
+      alert("Preencha peso, altura e idade primeiro.");
+      return;
+    }
+
+    var kg = parseFloat($("psbMetaKg").value);
+    var meses = parseInt($("psbMetaMeses").value, 10);
+
+    var lim = cfg.fitness.meta_mensal.limites;
+    kg = clamp(kg, lim.kg_min, lim.kg_max);
+    meses = clamp(meses, lim.meses_min, lim.meses_max);
+
+    var tmb = calcTMB(peso, alturaCm, idade, sexo);
+    var fatorObj = pickFactorByDays(isNaN(dias) ? 0 : dias, cfg.fitness.tdee.mapa_por_dias_treino);
+    var tdee = tmb * fatorObj.factor;
+
+    var kcalTotal = kg * cfg.fitness.objetivo_kcal.kcal_por_kg;
+    var diasTot = meses * 30;
+    var deficitDia = kcalTotal / diasTot;
+
+    deficitDia = clamp(deficitDia, 100, 900);
+    var metaKcalDia = tdee - deficitDia;
+
+    $("psbMetaOut").innerHTML =
+      "Para perder <b>" + round(kg, 1) + "kg</b> em <b>" + meses + " meses</b>: deficit de <b>" + Math.round(deficitDia) + " kcal/dia</b>.<br>" +
+      "Meta aproximada: <b>" + Math.round(metaKcalDia) + " kcal/dia</b> (estimativa).";
+  }
+
+  function caloriasAtividade() {
+    if (!cfg) return;
+
+    var peso = parseFloat($("psbPeso").value);
+    if (!peso) {
+      alert("Preencha o peso para calcular calorias corretamente.");
+      return;
+    }
+
+    var atvId = $("psbAtv").value;
+    var min = parseInt($("psbAtvMin").value, 10);
+
+    var list = (cfg.fitness.calorias_atividades && cfg.fitness.calorias_atividades.atividades) ? cfg.fitness.calorias_atividades.atividades : [];
+    var atv = null;
+    for (var i = 0; i < list.length; i++) { if (list[i].id === atvId) { atv = list[i]; break; } }
+    var met = atv ? atv.met : 0;
+
+    var total = Math.round(calcCaloriesByMET(met, peso, Math.max(1, min)));
+    $("psbAtvOut").innerHTML = "Estimativa: <b>" + total + " kcal</b> em " + min + " min (MET " + met + ").";
+  }
+
+  function restoreLast() {
+    try {
+      var raw = localStorage.getItem("psb_fitness_last");
+      if (!raw) return;
+      var v = JSON.parse(raw);
+      $("psbPeso").value = v.peso || "";
+      $("psbAltura").value = v.alturaCm || "";
+      $("psbIdade").value = v.idade || "";
+      $("psbSexo").value = v.sexo || "masculino";
+      $("psbNivel").value = v.nivel || "iniciante";
+      $("psbDias").value = (v.dias != null ? v.dias : 4);
+      $("psbTempo").value = (v.tempo != null ? v.tempo : 25);
+      $("psbObj").value = v.objetivo || "perder_peso";
+    } catch (e) { }
+  }
+
+  function reset() {
+    $("psbPeso").value = "";
+    $("psbAltura").value = "";
+    $("psbIdade").value = "";
+    $("psbSexo").value = "masculino";
+    $("psbNivel").value = "iniciante";
+    $("psbDias").value = 4;
+    $("psbTempo").value = 25;
+    $("psbObj").value = "perder_peso";
+    $("psbResults").style.display = "none";
+    $("psbMetaOut").textContent = "";
+    $("psbAtvOut").textContent = "";
+    try { localStorage.removeItem("psb_fitness_last"); } catch (e) { }
+  }
+
+  function bind() {
+    if ($("psbCalc")) $("psbCalc").addEventListener("click", calcular);
+    if ($("psbMetaCalc")) $("psbMetaCalc").addEventListener("click", metaMensal);
+    if ($("psbAtvCalc")) $("psbAtvCalc").addEventListener("click", caloriasAtividade);
+    if ($("psbReset")) $("psbReset").addEventListener("click", reset);
+  }
+
+  // init
+  document.addEventListener("DOMContentLoaded", function () {
+    bind();
+    loadCfg();
+  });
+})();
