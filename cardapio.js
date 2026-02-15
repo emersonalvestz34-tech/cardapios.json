@@ -2,7 +2,7 @@
   // 1) COLE AQUI o link RAW do seu JSON no GitHub:
   // Exemplo:
   // const DATA_URL = "https://raw.githubusercontent.com/SEU_USUARIO/SEU_REPO/main/cardapios.json";
-  const DATA_URL = "COLE_AQUI_O_LINK_RAW_DO_SEU_cardapios.json";
+  const DATA_URL = "https://raw.githubusercontent.com/emersonalvestz34-tech/cardapios.json/refs/heads/main/cardapios.json";
 
   const el = (id) => document.getElementById(id);
 
@@ -141,3 +141,4 @@ Obs.: ${data.meta?.aviso || ""}`.trim();
 
   document.addEventListener("DOMContentLoaded", init);
 })();
+
