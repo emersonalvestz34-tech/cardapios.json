@@ -5,7 +5,7 @@
   // var PSB_FITNESS_JSON_URL = "https://raw.githubusercontent.com/.../fitness.json";
 
   function $(id) { return document.getElementById(id); }
-  function round(n, d) { var p = Math.pow(10, d || 2); return Math.round(n * p) / p; }
+  function round(n, d) {   if (typeof n !== "number" || !isFinite(n)) return null;   var p = Math.pow(10, d || 2);   return Math.round(n * p) / p; }{ var p = Math.pow(10, d || 2); return Math.round(n * p) / p; }
   function clamp(n, min, max) { return Math.max(min, Math.min(max, n)); }
 
   var cfg = null;
