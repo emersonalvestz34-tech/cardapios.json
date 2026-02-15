@@ -2,7 +2,7 @@
   "use strict";
 
   // VOCE VAI DEFINIR ISSO NO HTML DO BLOGGER:
-  // var PSB_FITNESS_JSON_URL = "https://raw.githubusercontent.com/.../fitness.json";
+  // var PSB_FITNESS_JSON_URL = "https://raw.githubusercontent.com/emersonalvestz34-tech/cardapios.json/refs/heads/main/fitness.json";
 
   function $(id) { return document.getElementById(id); }
   function round(n, d) { var p = Math.pow(10, d || 2); return Math.round(n * p) / p; }
